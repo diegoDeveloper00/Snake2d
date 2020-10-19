@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Snake : MonoBehaviour
 {
@@ -9,39 +10,80 @@ public class Snake : MonoBehaviour
    public float snakeSpeed=7f;
     public GameObject snakeTail;
     GameObject tail;
+    List<Transform> tailList;
+    public bool eat = false;
+    bool horizontal = false;
+    bool vertical = true;
     // Start is called before the first frame update
     void Awake()
     {
         gridPosition = new Vector2(10, 10);
         transform.position = gridPosition;
         gridDirection = new Vector2(1, 0)*Time.deltaTime*7;
+        tailList = new List<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
+
     }
 
     private void Movement()
     {
+        if (eat)
+        {
+            tailList.Insert(0, tail.transform);
+            eat = false;
+        }
+        else if (tailList.Count > 0) {
+            tailList.Last().position = transform.position;
+            tailList.Insert(0, tailList.Last());
+            tailList.RemoveAt(tailList.Count - 1);
+        }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            gridDirection = new Vector2(0, 1);
+            if (!vertical)
+            {
+                gridDirection = new Vector2(0, 1);
+            }
+            vertical = true;
+            horizontal = false;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            gridDirection = new Vector2(0, -1);
+            if (!vertical)
+            {
+                gridDirection = new Vector2(0, -1);
+            }
+            vertical = true;
+            horizontal = false;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            gridDirection = new Vector2(1, 0);
+            if (!horizontal)
+            {
+                gridDirection = new Vector2(1, 0);
+            }
+            vertical = false;
+            horizontal = true;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            gridDirection = new Vector2(-1, 0);
+            if (!horizontal)
+            {
+                gridDirection = new Vector2(-1, 0);
+            }
+            vertical = false;
+            horizontal = true;
         }
         gridPosition += gridDirection * Time.deltaTime * snakeSpeed;
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
+        
+    }
+    public void grow()
+    {
+            tail = Instantiate(snakeTail, gridPosition, Quaternion.identity);
     }
 }
