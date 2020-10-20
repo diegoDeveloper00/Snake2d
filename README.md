@@ -6,7 +6,7 @@ this is a simple snake game 2d using unity<br>
 
 ---
 ## Game Engine:
-- Unity Technologies<img src="https://github.com/diegoDeveloper00/Snake2d/blob/main/unity-logo.jpg" height="20" width="20"> 
+- Unity Technologies<img src="https://github.com/diegoDeveloper00/Snake2d/blob/main/unity-logo.jpg"> 
 ---
 
 ## Programming Language:
