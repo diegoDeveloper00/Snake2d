@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Hit: " + collision.name);
@@ -12,14 +11,9 @@ public class Food : MonoBehaviour
         {
             Destroy(gameObject);
             FindObjectOfType<SpawnFood>().spawnFood();
-            StartCoroutine(waitForGrow());
+            collision.GetComponent<Snake>().eat = true;
+            UIManager.getInstance.updateScore(GameManager.getInstance.scorePerFood);
             collision.GetComponent<Snake>().grow();
         }
-    }
-
-    IEnumerator waitForGrow()
-    {
-        FindObjectOfType<Snake>().eat = true;
-        yield return new WaitForSeconds(1f);
     }
 }

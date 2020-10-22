@@ -7,41 +7,34 @@ public class Snake : MonoBehaviour
 {
     Vector2 gridPosition;
     Vector2 gridDirection;
-   public float snakeSpeed=7f;
     public GameObject snakeTail;
     GameObject tail;
     List<Transform> tailList;
     public bool eat = false;
     bool horizontal = false;
     bool vertical = true;
+    public bool isGameOver = false;
     // Start is called before the first frame update
     void Awake()
     {
         gridPosition = new Vector2(10, 10);
         transform.position = gridPosition;
-        gridDirection = new Vector2(1, 0)*Time.deltaTime*7;
         tailList = new List<Transform>();
+    }
+
+    private void Start()
+    {
+        if (isGameOver) { return; }
+        else if (!isGameOver)
+        {
+            InvokeRepeating("Movement", 0.1f, 0.1f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-
-    }
-
-    private void Movement()
-    {
-        if (eat)
-        {
-            tailList.Insert(0, tail.transform);
-            eat = false;
-        }
-        else if (tailList.Count > 0) {
-            tailList.Last().position = transform.position;
-            tailList.Insert(0, tailList.Last());
-            tailList.RemoveAt(tailList.Count - 1);
-        }
+        if (isGameOver) { return; }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (!vertical)
@@ -78,7 +71,22 @@ public class Snake : MonoBehaviour
             vertical = false;
             horizontal = true;
         }
-        gridPosition += gridDirection * Time.deltaTime * snakeSpeed;
+    }
+
+    private void Movement()
+    {
+        if (eat)
+        {
+            tailList.Insert(0, tail.transform);
+            eat = false;
+        }
+        else if (tailList.Count > 0) {
+            tailList.Last().position = transform.position;
+            tailList.Insert(0, tailList.Last());
+            tailList.RemoveAt(tailList.Count - 1);
+        }
+       
+        gridPosition += gridDirection;
         transform.position = new Vector2(gridPosition.x, gridPosition.y);
         
     }
