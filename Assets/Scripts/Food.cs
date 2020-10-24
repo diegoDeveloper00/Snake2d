@@ -13,6 +13,7 @@ public class Food : MonoBehaviour
             FindObjectOfType<SpawnFood>().spawnFood();
             collision.GetComponent<Snake>().eat = true;
             UIManager.getInstance.updateScore(GameManager.getInstance.scorePerFood);
+            GameManager.getInstance.updateHighScore();
             collision.GetComponent<Snake>().grow();
         }
     }

@@ -9,8 +9,8 @@ public class BackGround : MonoBehaviour
         if (collision.GetComponent<Snake>())
         {
             collision.GetComponent<Snake>().isGameOver = true;
+            collision.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
             GameManager.getInstance.gameOverCanvase.SetActive(true);
-            Destroy(collision.gameObject);
         }
     }
 

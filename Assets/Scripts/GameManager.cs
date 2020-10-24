@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public int totalScore;
 
+    public int highScore;
+
     private static GameManager instance;
 
     public static GameManager getInstance
@@ -27,6 +29,21 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        highScore = PlayerPrefs.GetInt("hishScore");
+    }
+
+    public void updateHighScore()
+    {
+        if (totalScore > PlayerPrefs.GetInt("highScore"))
+        {
+            highScore = totalScore;
+
+            PlayerPrefs.SetInt("highScore", highScore);
+        }
     }
 
 }

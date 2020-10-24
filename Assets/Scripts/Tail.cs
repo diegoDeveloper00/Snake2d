@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Tail : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Snake>())
+        if (collision.GetComponent<Snake>())
         {
-            Debug.Log("it enters in the tail script");
+            if (collision.GetComponent<Snake>().eat) { return; }
+            collision.GetComponent<Snake>().isGameOver = true;
+            collision.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+            GameManager.getInstance.gameOverCanvase.SetActive(true);
         }
     }
 }

@@ -24,11 +24,9 @@ public class Snake : MonoBehaviour
 
     private void Start()
     {
-        if (isGameOver) { return; }
-        else if (!isGameOver)
-        {
+       
             InvokeRepeating("Movement", 0.1f, 0.1f);
-        }
+        
     }
 
     // Update is called once per frame
@@ -75,6 +73,8 @@ public class Snake : MonoBehaviour
 
     private void Movement()
     {
+        if (isGameOver) { return; }
+
         if (eat)
         {
             tailList.Insert(0, tail.transform);
