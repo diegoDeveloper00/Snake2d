@@ -10,8 +10,7 @@ this is a simple snake game 2d using unity<br>
 ---
 
 ## Programming Language:
-- C#<img src="https://github.com/diegoDeveloper00/Snake2d/blob/main/c%23-logo.jpg" height="20" width="20"> 
-
+- ![image]https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white
 ---
 ## Project Structure
 
