@@ -10,7 +10,7 @@ this is a simple snake game 2d using unity<br>
 ---
 
 ## Programming Language:
-- ![image]https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white
+- ![image](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 ---
 ## Project Structure
 
